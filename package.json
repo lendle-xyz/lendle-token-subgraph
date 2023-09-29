@@ -1,0 +1,32 @@
+{
+  "name": "lendle-token-subgraph",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "create-local": "graph create --node http://localhost:8020/ gi/finance",
+    "remove-local": "graph remove --node http://localhost:8020/ gi/finance",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 gi/finance",
+    "test": "graph test",
+    "setup": "yarn codegen && yarn create-local && yarn deploy-local",
+    "prepare:mantle": "yarn codegen && yarn build",
+    "create:mantle:lendle": "graph create lendle-finance/lendle-token-mantle --node https://subgraph-rpc.lendle.xyz",
+    "deploy:mantle:lendle": "yarn prepare:mantle && graph deploy --ipfs https://api.thegraph.com/ipfs/ --node https://subgraph-rpc.lendle.xyz lendle-finance/lendle-token-mantle"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lendle-xyz/lendle-token-subgraph.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lendle-xyz/lendle-token-subgraph/issues"
+  },
+  "homepage": "https://github.com/lendle-xyz/lendle-token-subgraph#readme",
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.58.0",
+    "@graphprotocol/graph-ts": "^0.31.0"
+  }
+}

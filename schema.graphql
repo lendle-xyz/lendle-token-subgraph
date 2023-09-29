@@ -1,0 +1,38 @@
+type Account @entity {
+  " { Account address } "
+  id: ID!
+
+  ins: [Transfer!]! @derivedFrom(field: "to")
+
+  outs: [Transfer!]! @derivedFrom(field: "from")
+
+  " Protocol token balance in this account, in native amounts "
+  balance: BigInt!
+}
+
+type Transfer @entity(immutable: true) {
+  " { Transaction hash }-{ Log index } "
+  id: ID!
+
+  " Transaction hash of the transaction that emitted this event "
+  hash: String!
+
+  " Nonce of the transaction that emitted this event "
+  nonce: BigInt!
+
+  " Event log index. For transactions that don't emit event, create arbitrary index starting from 0 "
+  logIndex: Int!
+
+  " Block number of this event "
+  blockNumber: BigInt!
+
+  " Timestamp of this event "
+  timestamp: BigInt!
+
+  from: Account!
+
+  to: Account!
+
+  " Amount of token deposited in native units "
+  amount: BigInt!
+}
