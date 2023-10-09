@@ -19,12 +19,12 @@ export function handleTransfer(event: ERC20Transfer): void {
 
   // grab accounts
   let fromAccount = Account.load(from.toHexString());
-  if (!fromAccount && from.toHexString() != ZERO_ADDRESS) {
+  if (!fromAccount) {
     fromAccount = createAccount(from.toHexString());
   }
 
   let toAccount = Account.load(to.toHexString());
-  if (!toAccount && to.toHexString() != ZERO_ADDRESS) {
+  if (!toAccount) {
     toAccount = createAccount(to.toHexString());
   }
 
@@ -45,8 +45,8 @@ export function handleTransfer(event: ERC20Transfer): void {
   transfer.timestamp = event.block.timestamp;
   transfer.hash = event.transaction.hash.toHexString();
   transfer.logIndex = event.logIndex.toI32();
-  transfer.from = fromAccount ? fromAccount.id : ZERO_ADDRESS;
-  transfer.to = toAccount ? toAccount.id : ZERO_ADDRESS;
+  transfer.from = fromAccount.id;
+  transfer.to = toAccount.id;
   transfer.amount = amount;
   transfer.save();
 }

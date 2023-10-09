@@ -1,7 +1,6 @@
 Reference/
 .vscode/
 
-subgraph.yaml
 deploymentJsonContext.json
 **/configurations/configure.ts
 generated/
